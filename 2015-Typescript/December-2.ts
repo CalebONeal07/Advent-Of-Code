@@ -2,6 +2,7 @@ const input = Bun.file("input/december2");
 const text: string[] = (await input.text()).split("\r\n");
 
 var sum = 0;
+var ribbon = 0;
 
 for (const i in text) {
   const line = text[i];
@@ -26,7 +27,14 @@ for (const i in text) {
     if (min != null) {
       sum += min;
     }
+
+    ribbon += l * w * h;
+    const per = [l + w, w + h, h + l].sort((a, b) => a - b)[0];
+    if (per != null) {
+      ribbon += 2 * per;
+    }
   }
 }
 
 console.log(sum);
+console.log(ribbon);
