@@ -1,6 +1,10 @@
 {
-  "dependencies": {
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
+  "name": "2015-typescript",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }
