@@ -5,6 +5,7 @@
 ## Languages I've Used
 
 | Year |  Language  | Complete |
+|------|------------|----------|
 | 2015 | TypeScript | 4*       |
 | 2016 | Ruby       |          |
 | 2017 | Julia      |          |
