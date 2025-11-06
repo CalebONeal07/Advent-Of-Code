@@ -17,3 +17,4 @@
 | 2023 | Go         | 1 :star:    |
 | 2024 | Zig        | :x:         |
 | 2025 | OCaml      | **Planned** |
+| 2026 | F#         | **Planned** |
