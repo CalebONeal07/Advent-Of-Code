@@ -34,14 +34,21 @@ fn main() {
             .expect("quantity formatted incorrectly");
         let from = parts[3]
             .parse::<usize>()
-            .expect("from formatted incorrectly");
-        let to = parts[5].parse::<usize>().expect("to formatted incorrectly");
+            .expect("from formatted incorrectly")
+            - 1;
+        let to = parts[5].parse::<usize>().expect("to formatted incorrectly") - 1;
 
-        for _ in 0..quantity {
-            let val = stacks[from - 1].pop().unwrap();
-            stacks[to - 1].push(val);
-        }
+        // for _ in 0..quantity {
+        //     let val = stacks[from - 1].pop().unwrap();
+        //     stacks[to - 1].push(val);
+        // }
+
+        let mut vals: Vec<char> = stacks[from]
+            .drain(stacks[from].len() - quantity..)
+            .collect();
+        stacks[to].append(&mut vals);
     }
+
     for c in stacks.map(|s| *s.last().unwrap()) {
         print!("{}", c);
     }
