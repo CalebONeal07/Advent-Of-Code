@@ -1,21 +1,49 @@
-use std::{collections::VecDeque, io::stdin};
+use std::io::stdin;
 
 fn main() {
-    let input = stdin().lines();
-    let mut cargo = "".to_string();
-    let mut ships: Vec<VecDeque<char>> = vec![];
+    let (instructions, input): (Vec<String>, Vec<String>) = stdin()
+        .lines()
+        .map(|l| l.expect("Expected Input"))
+        .partition(|l| l.starts_with("move "));
 
-    for l in input {
-        let line = l.unwrap().to_string();
+    const EMPTY: Vec<char> = vec![];
+    let mut stacks: [Vec<char>; 9] = [EMPTY; 9];
 
-        if line == "".to_string() {
-            break;
+    for line in input
+        .iter()
+        .rev()
+        .skip(2)
+        .map(|l| l.chars().collect::<Vec<char>>())
+    {
+        for (i, val) in line.iter().skip(1).step_by(4).enumerate() {
+            print!("{}", val);
+            if *val != ' ' {
+                stacks[i].push(*val)
+            }
         }
+        println!()
+    }
 
-        cargo += &(cargo.clone() + "\r\n" + &line);
+    println!("{:?}", stacks);
 
-        for line in cargo.lines().skip(1) {
-            for i in (0..line.len()).step_by(4) {}
+    for instruction in instructions.iter() {
+        let parts: Vec<&str> = instruction.split(" ").collect();
+
+        let quantity = parts[1]
+            .parse::<usize>()
+            .expect("quantity formatted incorrectly");
+        let from = parts[3]
+            .parse::<usize>()
+            .expect("from formatted incorrectly");
+        let to = parts[5].parse::<usize>().expect("to formatted incorrectly");
+
+        for _ in 0..quantity {
+            let val = stacks[from - 1].pop().unwrap();
+            stacks[to - 1].push(val);
         }
     }
+    for c in stacks.map(|s| *s.last().unwrap()) {
+        print!("{}", c);
+    }
+    println!()
 }
