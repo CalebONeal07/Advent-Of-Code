@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[]) {
+int main() {
     FILE *input;
     fopen_s(&input, "december-1.in", "r");
 
@@ -10,16 +10,41 @@ int main(int argc, char *argv[]) {
 
     char line[100];
     while (fgets(line, 100, input)) {
+        printf("%s\t", line);
+        int step = atoi(line + 1);
+
         if (line[0] == 'R') {
-            pos += atoi(line + 1);
+            while (step > 0) {
+                pos++;
+
+                if (pos == 100) {
+                    pos = 0;
+                }
+
+                if (pos == 0) {
+                    code++;
+                }
+
+                step--;
+            }
         } else if (line[0] == 'L') {
-            pos -= atoi(line + 1);
+            while (step > 0) {
+                pos--;
+
+                if (pos == -1) {
+                    pos = 99;
+                }
+
+                if (pos == 0) {
+                    code++;
+                }
+
+                step--;
+            }
         }
 
-        pos = pos % 100;
-        if (pos == 0) {
-            code++;
-        }
+        printf("%d\t", pos);
+        printf("%d\n", code);
     }
 
     printf("%d", code);
