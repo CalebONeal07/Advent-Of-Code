@@ -41,19 +41,39 @@ int main() {
            char* id = malloc(100);
            sprintf(id, "%lld", val);
            int len = strlen(id);
-           if (len % 2 == 0) {
-               char invalid = TRUE;
-               for (int j = 0; j < len / 2; j++) {
-                   if (id[j] != id[j + len / 2]) {
-                       invalid = FALSE;
+
+           for (int n = 2; n <= len; n++) {
+               if (len % n == 0) {
+                   char invalid = TRUE;
+                   for (int c = 0; c < len / n; c++) {
+                       for (int j = c; j < len; j += len / n) {
+                           if (id[c] != id[j]) {
+                               invalid = FALSE;
+                           }
+                       }
+                   }
+
+                   if (invalid) {
+                       sum += val;
+                       printf("INVALID (%d): %s\n", n, id);
                        break;
                    }
                }
-               if (invalid) {
-                   sum += val;
-                   printf("INVALID: %s\n", id);
-               }
            }
+
+           // if (len % 2 == 0) {
+           //     char invalid = TRUE;
+           //     for (int j = 0; j < len / 2; j++) {
+           //         if (id[j] != id[j + len / 2]) {
+           //             invalid = FALSE;
+           //             break;
+           //         }
+           //     }
+           //     if (invalid) {
+           //         sum += val;
+           //         printf("INVALID: %s\n", id);
+           //     }
+           // }
        }
 
        token = strtok_s(NULL, ",", &context);
