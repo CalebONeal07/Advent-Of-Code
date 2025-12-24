@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_SIZE 200
+#define MAX_SIZE 1200
 
 struct Range {
     unsigned long long lower;
