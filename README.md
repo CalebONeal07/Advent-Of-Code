@@ -16,5 +16,5 @@
 | 2022 | Rust       | 12 :star:   |
 | 2023 | Go         | 1 :star:    |
 | 2024 | Zig        | :x:         |
-| 2025 | OCaml      | **Planned** |
+| 2025 | OCaml      | 11 :star:   |
 | 2026 | F#         | **Planned** |
